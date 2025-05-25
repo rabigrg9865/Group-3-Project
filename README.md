@@ -43,7 +43,7 @@ java -cp src Main
 # Collaborative To-Do List (Javascript CLI)
 
 ### Features:
-- add, list, start, complete, remove, and list tasks by category
+- Add, List, Start, Complete, Remove, and List tasks by category
 - Categorizes and assigns tasks to each user
 - Allows concurrent users
 - Stores data in a json file
