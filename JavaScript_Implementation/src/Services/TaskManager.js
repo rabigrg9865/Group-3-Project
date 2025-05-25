@@ -28,6 +28,48 @@ class TaskManager {
     return data.tasks.filter(t => t.assignedTo === username);
   }
 
+   //Method to start a task
+  async startTask(taskIndex, username) {
+      const data = await readData();
+      const userTasks = data.tasks.filter(t => t.assignedTo === username);
+      if (taskIndex < 0 || taskIndex >= userTasks.length) return false;
+      const task = userTasks[taskIndex];
+      if (task.status === 'Completed') return false;
+      task.status = 'In Progress';
+      task.updatedAt = new Date();
+      await writeData(data);
+      return true;
+  }
+
+   // Method to mark a task as complete
+  async completeTask(taskIndex, username) {
+    const data = await readData();
+    const userTasks = data.tasks.filter(t => t.assignedTo === username);
+    if (taskIndex < 0 || taskIndex >= userTasks.length) return false;
+    const task = userTasks[taskIndex];
+    if (task.status === 'Completed') return false;
+    task.status = 'Completed';
+    task.updatedAt = new Date();
+    await writeData(data);
+    return true;
+  }
+
+  // Method to remove a task
+  async removeTask(taskIndex, username) {
+    const data = await readData();
+    const userTasks = data.tasks.filter(t => t.assignedTo === username);
+    if (taskIndex < 0 || taskIndex >= userTasks.length) return false;
+    data.tasks.splice(data.tasks.indexOf(userTasks[taskIndex]), 1);
+    await writeData(data);
+    return true;
+  }
+
+  // Method to list tasks by category
+  async listByCategory(category) {
+     const data = await readData();
+     return data.tasks.filter(t => t.category === category);
+  }
+
 // Method to remove a user and their tasks
 async removeUser(username) {    
     const data = await readData();
