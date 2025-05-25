@@ -33,7 +33,6 @@ public class Main {
                         System.out.print("Task index: ");
                         int idComplete = Integer.parseInt(scanner.nextLine());
                         service.completeTask(idComplete);
-                        System.out.println("Task " + idComplete + " marked as completed.");
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input! Please enter correct task index/number to complete.");
                         continue;
@@ -45,7 +44,6 @@ public class Main {
                         System.out.print("Task index: ");
                         int idDelete = Integer.parseInt(scanner.nextLine());
                         service.deleteTask(idDelete);
-                        System.out.println("Task " + idDelete + " deleted.");
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input! Please enter correct task index/number to delete.");
                         continue;
@@ -56,7 +54,7 @@ public class Main {
                     return;
 
                 default:
-                    System.out.println("Invalid command!");
+                    System.out.println("Invalid command! Please select one of these options: add | list | complete | delete | exit");
             }
         }
     }
