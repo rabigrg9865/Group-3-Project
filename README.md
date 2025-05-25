@@ -36,6 +36,6 @@ Create a command-line or GUI-based to-do list that supports multiple users. Each
 
 ### How to Run:
 ```bash
-javac src/Main.java
+javac -d out src\model\*.java src\service\*.java src\storage\*.java src\Main.java
 java -cp src Main
 ```
