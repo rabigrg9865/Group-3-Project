@@ -27,3 +27,15 @@ Create a command-line or GUI-based to-do list that supports multiple users. Each
 ### JavaScript
 - Use **asynchronous operations** (like Promises or async/await) to simulate concurrent access
 - Employ **JSON** for data storage
+
+# Collaborative To-Do List (Java CLI)
+
+### Features:
+- Adds, completes, deletes tasks
+- Categorizes and assigns tasks to users
+
+### How to Run:
+```bash
+javac src/Main.java
+java -cp src Main
+```
