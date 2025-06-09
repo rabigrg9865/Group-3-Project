@@ -11,18 +11,18 @@ public class TaskService {
         TaskStorage.addTask(task);
     }
 
-    public void listTasks() {
-        List<Task> tasks = TaskStorage.getAllTasks();
+    public void listTasks(String userName) {
+        List<Task> tasks = TaskStorage.getTasksByUser(userName);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + ": " + tasks.get(i));
         }
     }
 
-    public void completeTask(int index) {
-        TaskStorage.markTaskCompleted(index);
+    public void completeTask(int index, String userName) {
+        TaskStorage.markTaskCompletedByUser(index, userName);
     }
 
-    public void deleteTask(int index) {
-        TaskStorage.removeTask(index);
+    public void deleteTask(int index, String userName) {
+        TaskStorage.removeTaskByUser(index, userName);
     }
 }

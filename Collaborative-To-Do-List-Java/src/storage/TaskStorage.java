@@ -32,4 +32,36 @@ public class TaskStorage {
             System.out.println("Task " + index + " does not exist. Please enter valid index.");
         }
     }
+
+    public static List<Task> getTasksByUser(String userName) {
+        List<Task> userTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains("Assigned to: " + userName)) {
+                userTasks.add(task);
+            }
+        }
+        return userTasks;
+    }
+
+    public static void markTaskCompletedByUser(int index, String userName) {
+        List<Task> userTasks = getTasksByUser(userName);
+        if (index >= 0 && index < userTasks.size()) {
+            Task task = userTasks.get(index);
+            task.markCompleted();
+            System.out.println("Task " + index + " marked as completed.");
+        } else {
+            System.out.println("Task " + index + " does not exist for user " + userName + ".");
+        }
+    }
+
+    public static void removeTaskByUser(int index, String userName) {
+        List<Task> userTasks = getTasksByUser(userName);
+        if (index >= 0 && index < userTasks.size()) {
+            Task task = userTasks.get(index);
+            taskList.remove(task);
+            System.out.println("Task " + index + " deleted.");
+        } else {
+            System.out.println("Task " + index + " does not exist for user " + userName + ".");
+        }
+    }
 }
