@@ -1,10 +1,10 @@
 package Test;
 
 import model.User;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
-    private HashMap<String, User> users = new HashMap<>();
+    private ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
     private User currentUser = null;
 
     public boolean register(String username) {

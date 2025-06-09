@@ -1,13 +1,13 @@
 import service.TaskService;
 import model.User;
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
     public static void main(String[] args) {
         TaskService service = new TaskService();
         Scanner scanner = new Scanner(System.in);
-        HashMap<String, User> users = new HashMap<>();
+        ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
         User currentUser = null;
 
         System.out.println("Welcome to Collaborative To-Do List");
