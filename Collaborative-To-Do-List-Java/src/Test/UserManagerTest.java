@@ -1,5 +1,7 @@
 package Test;
 
+import service.UserManager;
+
 public class UserManagerTest {
     public static void main(String[] args) {
         UserManager userManager = new UserManager();

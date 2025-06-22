@@ -1,6 +1,8 @@
 package Test;
 
 import model.User;
+import service.UserManager;
+
 import java.util.concurrent.CountDownLatch;
 
 public class UserManagerThreadSafetyTest {

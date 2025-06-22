@@ -1,13 +1,14 @@
 import service.TaskService;
+import service.UserManager;
 import model.User;
+
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
     public static void main(String[] args) {
         TaskService service = new TaskService();
+        UserManager userManager = new UserManager();
         Scanner scanner = new Scanner(System.in);
-        ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
         User currentUser = null;
 
         System.out.println("Welcome to Collaborative To-Do List");
@@ -16,40 +17,44 @@ public class Main {
             if (currentUser == null) {
                 System.out.println("\nOptions: register | login | exit");
                 System.out.print("Enter command: ");
-                String command = scanner.nextLine();
+                String command = scanner.nextLine().trim();
+
                 switch (command) {
                     case "register":
                         System.out.print("Choose a username: ");
-                        String regUser = scanner.nextLine();
-                        if (users.containsKey(regUser)) {
+                        String regUser = scanner.nextLine().trim();
+                        if (!userManager.register(regUser)) {
                             System.out.println("Username already exists.");
                         } else {
-                            users.put(regUser, new User(regUser));
                             System.out.println("Registration successful. You can now login.");
                         }
                         break;
+
                     case "login":
                         System.out.print("Username: ");
-                        String loginUser = scanner.nextLine();
-                        if (users.containsKey(loginUser)) {
-                            currentUser = users.get(loginUser);
+                        String loginUser = scanner.nextLine().trim();
+                        if (userManager.login(loginUser)) {
+                            currentUser = userManager.getCurrentUser();
                             System.out.println("Login successful. Welcome, " + currentUser.getUsername() + "!");
                         } else {
                             System.out.println("User not found. Please register first.");
                         }
                         break;
+
                     case "exit":
                         System.out.println("Goodbye!");
                         return;
+
                     default:
                         System.out.println("Invalid command.");
                 }
+
                 continue;
             }
 
             System.out.println("\nOptions: add | list | complete | delete | logout | exit");
             System.out.print("Enter command: ");
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
             switch (command) {
                 case "add":
@@ -70,8 +75,7 @@ public class Main {
                         int idComplete = Integer.parseInt(scanner.nextLine());
                         service.completeTask(idComplete, currentUser.getUsername());
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid input! Please enter correct task index/number to complete.");
-                        continue;
+                        System.out.println("Invalid input! Please enter a valid task number.");
                     }
                     break;
 
@@ -81,17 +85,20 @@ public class Main {
                         int idDelete = Integer.parseInt(scanner.nextLine());
                         service.deleteTask(idDelete, currentUser.getUsername());
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid input! Please enter correct task index/number to delete.");
-                        continue;
+                        System.out.println("Invalid input! Please enter a valid task number.");
                     }
                     break;
+
                 case "logout":
+                    userManager.logout();
                     currentUser = null;
                     System.out.println("Logged out.");
                     break;
+
                 case "exit":
                     System.out.println("Goodbye!");
                     return;
+
                 default:
                     System.out.println("Invalid command.");
             }
